@@ -12967,6 +12967,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "WeatherWidget",
+  data: {
+    temp: 0,
+    time: new Date()
+  },
+  methods: {
+    getWeather: function getWeather() {
+      var request = new XMLHttpRequest();
+      request.withCredentials = true;
+      request.open('GET', 'https://api.gismeteo.net/v2/search/cities/?query=москв', true);
+      request.setRequestHeader('X-Gismeteo-Token', '56b30cb255.3443075'); //56b30cb255.3443075
+
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          var wetherData = JSON.parse(request.responseText);
+          console.log(wetherData);
+        }
+      };
+
+      request.onerror = function () {
+        console.log('There was a connection error');
+      };
+
+      request.send();
+    }
+  },
+  created: function created() {
+    this.getWeather();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/containers/SideBar.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/containers/SideBar.vue?vue&type=script&lang=js& ***!
@@ -13013,12 +13060,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/svg */ "./resources/js/components/svg/index.js");
 /* harmony import */ var _vars_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vars/index */ "./resources/js/vars/index.js");
+/* harmony import */ var _components_Weathe_WeatherWidget__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Weathe/WeatherWidget */ "./resources/js/components/Weathe/WeatherWidget.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -13093,11 +13142,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TopNav",
   components: {
     MenuIcon: _components_svg__WEBPACK_IMPORTED_MODULE_4__["MenuIcon"],
-    MobileMenuIcon: _components_svg__WEBPACK_IMPORTED_MODULE_4__["MobileMenuIcon"]
+    MobileMenuIcon: _components_svg__WEBPACK_IMPORTED_MODULE_4__["MobileMenuIcon"],
+    WeatherWidget: _components_Weathe_WeatherWidget__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   data: function data() {
     return {
@@ -50524,6 +50575,30 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/svg/MenuIcon.vue?vue&type=template&id=af4f07a4&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/svg/MenuIcon.vue?vue&type=template&id=af4f07a4& ***!
@@ -50852,40 +50927,47 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "navbar-right" }, [
-        _c(
-          "div",
-          { staticClass: "user d-inline-block" },
-          [
-            _c("b-dropdown", {
-              staticClass: "dropdown-menu-right",
-              attrs: {
-                right: "",
-                variant: "empty",
-                "toggle-class": "p-0",
-                "menu-class": "mt-3",
-                "no-caret": ""
-              },
-              scopedSlots: _vm._u([
-                {
-                  key: "button-content",
-                  fn: function() {
-                    return [
-                      _c("span", { staticClass: "name mr-1" }, [
-                        _vm._v("Анонимный пользователь")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_c("img", { attrs: { alt: "", src: "" } })])
-                    ]
-                  },
-                  proxy: true
-                }
-              ])
-            })
-          ],
-          1
-        )
-      ])
+      _c(
+        "div",
+        { staticClass: "navbar-right" },
+        [
+          _c("WeatherWidget"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "user d-inline-block" },
+            [
+              _c("b-dropdown", {
+                staticClass: "dropdown-menu-right",
+                attrs: {
+                  right: "",
+                  variant: "empty",
+                  "toggle-class": "p-0",
+                  "menu-class": "mt-3",
+                  "no-caret": ""
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "button-content",
+                    fn: function() {
+                      return [
+                        _c("span", { staticClass: "name mr-1" }, [
+                          _vm._v("Анонимный пользователь")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_c("img", { attrs: { alt: "", src: "" } })])
+                      ]
+                    },
+                    proxy: true
+                  }
+                ])
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -67146,6 +67228,75 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_4__["store"]
 }).$mount('#app');
+
+/***/ }),
+
+/***/ "./resources/js/components/Weathe/WeatherWidget.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Weathe/WeatherWidget.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true& */ "./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true&");
+/* harmony import */ var _WeatherWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WeatherWidget.vue?vue&type=script&lang=js& */ "./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WeatherWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5344fc92",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Weathe/WeatherWidget.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WeatherWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./WeatherWidget.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WeatherWidget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Weathe/WeatherWidget.vue?vue&type=template&id=5344fc92&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeatherWidget_vue_vue_type_template_id_5344fc92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

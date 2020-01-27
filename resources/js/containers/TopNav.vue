@@ -48,6 +48,7 @@
             <span class="logo-mobile d-block d-xs-none"></span>
         </a-->
         <div class="navbar-right">
+            <WeatherWidget></WeatherWidget>
             <div class="user d-inline-block">
                 <b-dropdown class="dropdown-menu-right" right variant="empty" toggle-class="p-0" menu-class="mt-3" no-caret>
                     <template v-slot:button-content>
@@ -73,11 +74,13 @@
     import { mapGetters, mapMutations, mapActions } from 'vuex'
     import { MenuIcon, MobileMenuIcon } from '../components/svg'
     import { menuHiddenBreakpoint } from '../vars/index'
+    import WeatherWidget from "../components/Weathe/WeatherWidget";
     export default {
         name: "TopNav",
         components: {
             MenuIcon,
-            MobileMenuIcon
+            MobileMenuIcon,
+            WeatherWidget
         },
         data() {
             return {
@@ -111,7 +114,8 @@
                     this.isMobileSearch = false
                     this.searchKeyword = ''
                 }
-            }
+            },
+
         },
         computed: {
             ...mapGetters({
