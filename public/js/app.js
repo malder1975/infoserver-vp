@@ -13025,6 +13025,25 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vars */ "./resources/js/vars/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -13040,7 +13059,119 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SideBar"
+  name: "SideBar",
+  data: function data() {
+    return {
+      selectedParentMenu: '',
+      isMenuOver: false
+    };
+  },
+  mounted: function mounted() {
+    this.selectMenu();
+    window.addEventListener('resize', this.handleWindowResize);
+    document.addEventListener('click', this.returnSelectedMenu);
+    this.handleWindowResize();
+  },
+  beforeDestroy: function beforeDestroy() {
+    document.removeEventListener('click', this.returnSelectedMenu);
+    window.removeEventListener('resize', this.handleWindowResize);
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['changeSideMenuStatus', 'addMenuClassname', 'changeSelectedMenuHasSubItems']), {
+    selectMenu: function selectMenu() {
+      var currentParentUrl = this.$route.path.split('/').filter(function (x) {
+        return x !== '';
+      })[1];
+
+      if (currentParentUrl !== undefined || currentParentUrl !== null) {
+        this.selectedParentMenu = currentParentUrl.toLowerCase();
+      } else {
+        this.selectedParentMenu = 'dashboards';
+      }
+    },
+    changeSelectedParentHasNoSubmenu: function changeSelectedParentHasNoSubmenu(parentMenu) {
+      this.SelectedParentMenu = parentMenu;
+      this.changeSelectedMenuHasSubItems(false);
+      this.changeMenuStatus({
+        step: 0,
+        classNames: this.menuType
+      });
+    },
+    openSubMenu: function openSubMenu(e, selectedParent) {
+      this.changeSelectedMenuHasSubItems(true);
+      var currentClasses = this.menuType ? this.menuType.split(' ').filter(function (x) {
+        return x !== '';
+      }) : '';
+
+      if (!currentClasses.includes('menu-mobile')) {
+        if (currentClasses.includes('menu-sub-hidden') && (this.menuClickCount === 2 || this.menuClickCount === 0)) {
+          this.changeSideMenuStatus({
+            step: 3,
+            classNames: this.menuType
+          });
+        } else if (currentClasses.includes('menu-hidden') && (this.menuClickCount === 1 || this.menuClickCount === 3)) {
+          this.changeSideMenuStatus({
+            step: 2,
+            classNames: this.menuType
+          });
+        } else if (currentClasses.includes('menu-default') && !currentClasses.includes('menu-sub-hidden') && (this.menuClickCount === 1 || this.menuClickCount === 3)) {
+          this.changeSideMenuStatus({
+            step: 0,
+            classNames: this.menuType
+          });
+        }
+      } else {
+        this.addMenuClassname({
+          className: 'sub-show-temporary',
+          currentClasses: this.menuType
+        });
+      }
+
+      this.selectedParentMenu = selectedParent;
+    },
+    addEvents: function addEvents() {
+      document.addEventListener('click', this.handleDocumentClick);
+    },
+    removeEvents: function removeEvents() {
+      document.removeEventListener('click', this.handleDocumentClick);
+    },
+    returnSelectedMenu: function returnSelectedMenu() {
+      if (!this.isMenuOwer) {
+        this.selectMenu();
+      }
+    },
+    handleDocumentClick: function handleDocumentClick(e) {
+      if (!this.isMenuOwer) {
+        var cont = true;
+        e.path.map(function (p) {
+          if (p.nodeName !== 'svg' && p.className !== undefined && p.className.indexOf('menu-button') > -1) {
+            cont = false;
+          }
+        });
+
+        if (cont) {
+          this.toggle();
+        }
+      }
+    },
+    toggle: function toggle() {
+      var currentClasses = this.menuType.split(' ').filter(function (x) {
+        return x !== '';
+      });
+
+      if (currentClasses.includes('menu-sub-hidden') && this.menuClickCount === 3) {
+        this.changeSideMenuStatus({
+          step: 2,
+          classNames: this.menuType
+        });
+      } else if (currentClasses.includes('menu-hidden') || currentClasses.includes('menu-mobile')) {
+        this.changeSideMenuStatus({
+          step: 0,
+          classNames: this.menuType
+        });
+      }
+    } // Ресайзим
+
+  })
 });
 
 /***/ }),
@@ -50737,7 +50868,75 @@ var render = function() {
                 settings: { suppressScrollX: true, wheelPropagation: false }
               }
             },
-            [_c("ul", { staticClass: "list-unstyled" })]
+            [
+              _c("ul", { staticClass: "list-unstyled" }, [
+                _c(
+                  "li",
+                  {
+                    class: { active: _vm.selectedParentMenu === "dashboards" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#dashboards" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.openSubMenu($event, "dashboards")
+                          }
+                        }
+                      },
+                      [_c("i", {}), _vm._v("Dashboards")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { class: { active: _vm.selectedParentMenu === "pages" } },
+                  [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#pages" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.openSubMenu($event, "pages")
+                          }
+                        }
+                      },
+                      [_c("i", {}), _vm._v("Pages ")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "sub-menu" },
+        [
+          _c(
+            "vue-perfect-scrollbar",
+            {
+              staticClass: "scroll",
+              attrs: {
+                settings: { suppressScrollX: true, wheelPropagation: false }
+              }
+            },
+            [
+              _c("ul", {
+                staticClass: "list-unstyled",
+                class: { "d-block": _vm.selectedParentMenu === "dashboards" },
+                attrs: { "data-link": "dashboards" }
+              })
+            ]
           )
         ],
         1
