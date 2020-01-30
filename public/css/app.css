@@ -11395,6 +11395,30 @@ body.background main .container {
   height: 100%;
 }
 
+#DisplayOptions a {
+  cursor: pointer;
+}
+
+.text-secondary {
+  color: #212121 !important;
+}
+
+.main-heading {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.separator {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.rounded {
+  border-radius: 50px !important;
+}
+
+.white {
+  color: #fff !important;
+}
+
 /* 09. Панель навигации*/
 
 .navbar {
@@ -11549,12 +11573,6 @@ body.background main .container {
   left: 0;
   right: 0;
   margin: 0 auto;
-  /*  .logo-mobile {
-        width: 100%;
-        height: 100%;
-        background: url($logoPathMobile) no-repeat;
-        background-position: center center;
-    } */
 }
 
 .navbar .navbar-logo .logo {
@@ -11562,6 +11580,13 @@ body.background main .container {
   height: 100%;
   background: url("/img/Wolga-Flot2.svg") no-repeat;
   background-position: 50%;
+}
+
+.navbar .navbar-logo .logo-mobile {
+  width: 100%;
+  height: 100%;
+  background: url("/img/Wolga-Flot.svg") no-repeat;
+  background-position: center center;
 }
 
 @media (max-width: 767px) {
@@ -11838,6 +11863,10 @@ body.background main .container {
 .sidebar .ps-container {
   margin-right: 0;
   padding-right: 0;
+}
+
+.sidebar .rounded {
+  border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .sidebar .main-menu {

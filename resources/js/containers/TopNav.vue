@@ -127,7 +127,7 @@
             document.removeEventListener('click', this.handleDocumentfroMobileSearch)
         },
         watch: {
-            isMobileSeatch(val) {
+            isMobileSearch(val) {
                 if (val) {
                     document.addEventListener('click', this.handleDocumentfroMobileSearch)
                 } else {

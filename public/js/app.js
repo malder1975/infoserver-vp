@@ -13056,6 +13056,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -13085,7 +13087,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (currentParentUrl !== undefined || currentParentUrl !== null) {
         this.selectedParentMenu = currentParentUrl.toLowerCase();
       } else {
-        this.selectedParentMenu = 'dashboards';
+        this.selectedParentMenu = 'dislocation';
       }
     },
     changeSelectedParentHasNoSubmenu: function changeSelectedParentHasNoSubmenu(parentMenu) {
@@ -13169,9 +13171,82 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           classNames: this.menuType
         });
       }
-    } // Ресайзим
+    },
+    // Ресайзим
+    handleWindowResize: function handleWindowResize(event) {
+      if (event && !event.isTrusted) {
+        return;
+      }
 
-  })
+      var nextClasses = this.getMenuClassesForResize(this.menuType);
+      this.changeSideMenuStatus({
+        step: 0,
+        classNames: nextClasses.join(' ')
+      });
+    },
+    getMenuClassesForResize: function getMenuClassesForResize(classes) {
+      var nextClasses = classes.split(' ').filter(function (x) {
+        return x !== '';
+      });
+      var windowWidth = window.innerWidth;
+
+      if (windowWidth < _vars__WEBPACK_IMPORTED_MODULE_1__["menuHiddenBreakpoint"]) {
+        nextClasses.push('menu-mobile');
+      } else if (windowWidth < _vars__WEBPACK_IMPORTED_MODULE_1__["subHiddenBreakpoint"]) {
+        nextClasses = nextClasses.filter(function (x) {
+          return x !== 'menu-mobile';
+        });
+
+        if (nextClasses.includes('menu-default') && !nextClasses.includes('menu-sub-hidden')) {
+          nextClasses.push('menu-sub-hidden');
+        }
+      } else {
+        nextClasses = nextClasses.filter(function (x) {
+          return x !== 'menu-mobile';
+        });
+
+        if (nextClasses.includes('menu-default') && nextClasses.includes('menu-sub-hidden')) {
+          nextClasses = nextClasses.filter(function (x) {
+            return x !== 'menu-sub-hidden';
+          });
+        }
+      }
+
+      return nextClasses;
+    },
+    // Устанавливаем тип меню по умолчанию
+    changeDefaultMenuType: function changeDefaultMenuType(containerClassnames) {
+      var nextClasses = this.getMenuClassesForResize(containerClassnames);
+      this.changeSideMenuStatus({
+        step: 0,
+        classNames: nextClasses.join(' ')
+      });
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    menuType: 'getMenuType',
+    menuClickCount: 'getMenuClickCount',
+    selectedMenuHasSubItems: 'getSelectedMenuHasSubItems'
+  })),
+  watch: {
+    menuType: function menuType(val) {
+      if (val.indexOf('show-temporary') > -1) {
+        this.addEvents();
+      } else {
+        this.removeEvents();
+      }
+    },
+    '$route': function $route(to, from) {
+      if (to.path !== from.path) {
+        this.changeSideMenuStatus({
+          step: 0,
+          classNames: this.menuType
+        });
+        this.selectMenu();
+        window.scrollTo(0, top);
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -13321,7 +13396,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     document.removeEventListener('click', this.handleDocumentfroMobileSearch);
   },
   watch: {
-    isMobileSeatch: function isMobileSeatch(val) {
+    isMobileSearch: function isMobileSearch(val) {
       if (val) {
         document.addEventListener('click', this.handleDocumentfroMobileSearch);
       } else {
@@ -50873,28 +50948,30 @@ var render = function() {
                 _c(
                   "li",
                   {
-                    class: { active: _vm.selectedParentMenu === "dashboards" }
+                    class: { active: _vm.selectedParentMenu === "dislocation" }
                   },
                   [
                     _c(
                       "a",
                       {
-                        attrs: { href: "#dashboards" },
+                        attrs: { href: "#dislocation" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.openSubMenu($event, "dashboards")
+                            return _vm.openSubMenu($event, "dislocation")
                           }
                         }
                       },
-                      [_c("i", {}), _vm._v("Dashboards")]
+                      [_c("i", {}), _vm._v("Дислокация")]
                     )
                   ]
                 ),
                 _vm._v(" "),
                 _c(
                   "li",
-                  { class: { active: _vm.selectedParentMenu === "pages" } },
+                  {
+                    class: { active: _vm.selectedParentMenu === "vslpositions" }
+                  },
                   [
                     _c(
                       "a",
@@ -50903,11 +50980,11 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.openSubMenu($event, "pages")
+                            return _vm.openSubMenu($event, "vslpositions")
                           }
                         }
                       },
-                      [_c("i", {}), _vm._v("Pages ")]
+                      [_c("i", {}), _vm._v("Суда - позиции ")]
                     )
                   ]
                 )
@@ -50931,11 +51008,22 @@ var render = function() {
               }
             },
             [
-              _c("ul", {
-                staticClass: "list-unstyled",
-                class: { "d-block": _vm.selectedParentMenu === "dashboards" },
-                attrs: { "data-link": "dashboards" }
-              })
+              _c(
+                "ul",
+                {
+                  staticClass: "list-unstyled",
+                  class: {
+                    "d-block": _vm.selectedParentMenu === "dislocation"
+                  },
+                  attrs: { "data-link": "dislocation" }
+                },
+                [
+                  _c("router-link", { attrs: { tag: "li", to: "#" } }, [
+                    _c("a", [_c("i"), _c("span", [_vm._v("Карта судов ВП")])])
+                  ])
+                ],
+                1
+              )
             ]
           )
         ],
@@ -67841,7 +67929,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../vars */ "./resources/js/vars/index.js");
 
 var state = {
-  namespaced: true,
   menuType: _vars__WEBPACK_IMPORTED_MODULE_0__["defaultMenuType"],
   clickCount: 0,
   selectedMenuHasSubItems: _vars__WEBPACK_IMPORTED_MODULE_0__["defaultMenuType"] === 'menu-default'
@@ -67853,17 +67940,14 @@ var getters = {
   getSelectedMenuHasSubItems: function getSelectedMenuHasSubItems(state) {
     return state.selectedMenuHasSubItems;
   },
-  getClickCount: function getClickCount(state) {
+  getMenuClickCount: function getMenuClickCount(state) {
     return state.clickCount % 4;
   }
 };
 var mutations = {
-  // Выбор состояния бокового меню
   changeSideMenuStatus: function changeSideMenuStatus(state, payload) {
-    var classNames = payload.classNames; // Наименования классов меню
-
-    var clickIndex = payload.step; // Индекс вложенности меню
-
+    var classNames = payload.classNames;
+    var clickIndex = payload.step;
     var currentClasses = classNames.split(' ').filter(function (x) {
       return x !== '';
     });
@@ -67928,7 +68012,7 @@ var mutations = {
     }
 
     state.menuType = nextClasses;
-    state.clickOut = clickIndex;
+    state.clickCount = clickIndex;
   },
   changeSelectedMenuHasSubItems: function changeSelectedMenuHasSubItems(state, payload) {
     state.selectedMenuHasSubItems = payload;

@@ -5,8 +5,8 @@
             <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
                 <ul class="list-unstyled">
 
-                    <li :class="{ active : selectedParentMenu === 'dashboards' }"><a @click.prevent="openSubMenu($event, 'dashboards')" href="#dashboards"><i class=""></i>Dashboards</a> </li>
-                    <li :class="{ active : selectedParentMenu === 'pages' }"><a @click.prevent="openSubMenu($event, 'pages')" href="#pages"><i class=""></i>Pages </a> </li>
+                    <li :class="{ active : selectedParentMenu === 'dislocation' }"><a @click.prevent="openSubMenu($event, 'dislocation')" href="#dislocation"><i class=""></i>Дислокация</a> </li>
+                    <li :class="{ active : selectedParentMenu === 'vslpositions' }"><a @click.prevent="openSubMenu($event, 'vslpositions')" href="#pages"><i class=""></i>Суда - позиции </a> </li>
 
                 </ul>
             </vue-perfect-scrollbar>
@@ -15,7 +15,9 @@
         <!-- Подъменю -->
         <div class="sub-menu">
             <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
-                <ul class="list-unstyled" data-link="dashboards" :class="{ 'd-block' :selectedParentMenu === 'dashboards' }">
+                <ul class="list-unstyled" data-link="dislocation" :class="{ 'd-block' :selectedParentMenu === 'dislocation' }">
+
+                    <router-link tag="li" to="#"><a><i></i><span>Карта судов ВП</span></a></router-link>
 
                 </ul>
             </vue-perfect-scrollbar>
@@ -52,7 +54,7 @@
                 if (currentParentUrl !== undefined || currentParentUrl !== null) {
                     this.selectedParentMenu = currentParentUrl.toLowerCase()
                 } else {
-                    this.selectedParentMenu = 'dashboards'
+                    this.selectedParentMenu = 'dislocation'
                 }
             },
             changeSelectedParentHasNoSubmenu(parentMenu) {
@@ -125,6 +127,63 @@
             },
 
             // Ресайзим
+            handleWindowResize(event) {
+                if (event && !event.isTrusted) {
+                    return
+                }
+                let nextClasses = this.getMenuClassesForResize(this.menuType)
+                this.changeSideMenuStatus({ step: 0, classNames: nextClasses.join(' ') })
+            },
+            getMenuClassesForResize(classes) {
+                let nextClasses = classes.split(' ').filter(x => x !== '')
+                const windowWidth = window.innerWidth
+
+                if (windowWidth < menuHiddenBreakpoint) {
+                    nextClasses.push('menu-mobile')
+                } else if (windowWidth < subHiddenBreakpoint) {
+                    nextClasses = nextClasses.filter(x => x !== 'menu-mobile')
+                    if (nextClasses.includes('menu-default') &&
+                        !nextClasses.includes('menu-sub-hidden')) {
+                        nextClasses.push('menu-sub-hidden')
+                    }
+                } else {
+                    nextClasses = nextClasses.filter(x => x !== 'menu-mobile')
+                    if (nextClasses.includes('menu-default') &&
+                        nextClasses.includes('menu-sub-hidden')) {
+                        nextClasses = nextClasses.filter(x => x !== 'menu-sub-hidden')
+                    }
+                }
+                return nextClasses
+            },
+
+            // Устанавливаем тип меню по умолчанию
+            changeDefaultMenuType(containerClassnames) {
+                let nextClasses = this.getMenuClassesForResize(containerClassnames)
+                this.changeSideMenuStatus({ step: 0, classNames: nextClasses.join(' ') })
+            }
+        },
+        computed: {
+            ...mapGetters({
+                menuType: 'getMenuType',
+                menuClickCount: 'getMenuClickCount',
+                selectedMenuHasSubItems: 'getSelectedMenuHasSubItems'
+            })
+        },
+        watch: {
+            menuType: function(val) {
+                if (val.indexOf('show-temporary') > -1) {
+                    this.addEvents()
+                } else {
+                    this.removeEvents()
+                }
+            },
+            '$route' (to, from) {
+                if (to.path !== from.path) {
+                    this.changeSideMenuStatus({ step: 0, classNames: this.menuType} )
+                    this.selectMenu()
+                    window.scrollTo(0, top)
+                }
+            }
         }
     }
 </script>
