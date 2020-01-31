@@ -52,6 +52,7 @@
             selectMenu() {
                 const currentParentUrl = this.$route.path.split('/').filter(x => x !== '')[1]
                 if (currentParentUrl !== undefined || currentParentUrl !== null) {
+                    console.log(currentParentUrl)
                     this.selectedParentMenu = currentParentUrl.toLowerCase()
                 } else {
                     this.selectedParentMenu = 'dislocation'
@@ -60,7 +61,7 @@
             changeSelectedParentHasNoSubmenu(parentMenu) {
                 this.SelectedParentMenu = parentMenu
                 this.changeSelectedMenuHasSubItems(false)
-                this.changeMenuStatus({ step: 0, classNames: this.menuType })
+                this.changeSideMenuStatus({ step: 0, classNames: this.menuType })
             },
             openSubMenu(e, selectedParent) {
                 this.changeSelectedMenuHasSubItems(true)

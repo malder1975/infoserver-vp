@@ -9,13 +9,13 @@ const state = {
 }
 
 const getters = {
-    getMenuType (state) {
+    getMenuType: (state) => {
         return state.menuType
     },
-    getSelectedMenuHasSubItems (state) {
+    getSelectedMenuHasSubItems: (state) => {
         return state.selectedMenuHasSubItems
     },
-    getMenuClickCount (state) {
+    getMenuClickCount: (state)  => {
         return state.clickCount % 4
     }
 }
@@ -113,8 +113,8 @@ const mutations = {
             : ''
         let nextClasses = ''
         if (currentClasses.includes('main-show-temporary')) {
+            console .log(currentClasses, strCurrentClasses)
             nextClasses = currentClasses
-
                 .filter(x => x !== 'main-show-temporary')
                 .join(' ')
         } else {

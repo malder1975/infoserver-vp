@@ -17,7 +17,8 @@
                 <b-form-input
                     placeholder="Поиск"
                     @keypress.native.enter="search"
-                    v-model="searchKeyword"></b-form-input>
+                    v-model="searchKeyword">
+                </b-form-input>
                     <b-input-group-append>
                         <span class="search-icon" @click="searchClick">
                             <font-awesome-icon fas icon="search"></font-awesome-icon>
@@ -30,7 +31,7 @@
                 <span class="ml-2">
                     <font-awesome-icon fab icon="periscope" size="2x"></font-awesome-icon>
                 </span>
-                <b-dropdown id="geo-loc" class="ml-2" variant="light" size="sm" toggle-class="geo-button">
+                <b-dropdown id="geo-loc" class="geoloc-button ml-2" variant="light" size="sm" toggle-class="geo-button">
                     <template slot="button-content">
                         <span class="name">Нижний Новгород</span>
                     </template>

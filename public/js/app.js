@@ -13085,6 +13085,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })[1];
 
       if (currentParentUrl !== undefined || currentParentUrl !== null) {
+        console.log(currentParentUrl);
         this.selectedParentMenu = currentParentUrl.toLowerCase();
       } else {
         this.selectedParentMenu = 'dislocation';
@@ -13093,7 +13094,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     changeSelectedParentHasNoSubmenu: function changeSelectedParentHasNoSubmenu(parentMenu) {
       this.SelectedParentMenu = parentMenu;
       this.changeSelectedMenuHasSubItems(false);
-      this.changeMenuStatus({
+      this.changeSideMenuStatus({
         step: 0,
         classNames: this.menuType
       });
@@ -13273,6 +13274,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -51174,7 +51176,7 @@ var render = function() {
             _c(
               "b-dropdown",
               {
-                staticClass: "ml-2",
+                staticClass: "geoloc-button ml-2",
                 attrs: {
                   id: "geo-loc",
                   variant: "light",
@@ -68030,6 +68032,7 @@ var mutations = {
     var nextClasses = '';
 
     if (currentClasses.includes('main-show-temporary')) {
+      console.log(currentClasses, strCurrentClasses);
       nextClasses = currentClasses.filter(function (x) {
         return x !== 'main-show-temporary';
       }).join(' ');
