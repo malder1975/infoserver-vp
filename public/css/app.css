@@ -12705,6 +12705,56 @@ button {
           transform: translateX(0);
 }
 
+.menu-mobile .main-menu {
+  -webkit-transform: translateX(-90px);
+          transform: translateX(-90px);
+}
+.menu-mobile .sub-menu {
+  -webkit-transform: translateX(-330px);
+          transform: translateX(-330px);
+}
+
+.main-show-temporary .main-menu {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+.main-show-temporary .sub-menu {
+  -webkit-transform: translateX(-230px);
+          transform: translateX(-230px);
+}
+@media (max-width: 1439px) {
+  .main-show-temporary .main-menu {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  .main-show-temporary .sub-menu {
+    -webkit-transform: translateX(-220px);
+            transform: translateX(-220px);
+  }
+}
+@media (max-width: 1199px) {
+  .main-show-temporary .main-menu {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  .main-show-temporary .sub-menu {
+    -webkit-transform: translateX(-200px);
+            transform: translateX(-200px);
+  }
+}
+@media (max-width: 767px) {
+  .main-show-temporary .sub-menu {
+    -webkit-transform: translateX(-190px);
+            transform: translateX(-190px);
+  }
+}
+
+.sub-show-temporary .sub-menu,
+.menu-mobile.sub-show-temporary .sub-menu {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
 /* 11.Apps*/
 .app-menu {
   z-index: 1;

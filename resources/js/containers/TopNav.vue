@@ -33,10 +33,14 @@
                 </span>
                 <b-dropdown id="geo-loc" class="geoloc-button ml-2" variant="light" size="sm" toggle-class="geo-button">
                     <template slot="button-content">
-                        <span class="name">Нижний Новгород</span>
+                        <span class="name">{{ defaultGeoLoc }} </span>
                     </template>
-                    <b-dropdown-item @click="changeGeoLoc">Нижний Новгород</b-dropdown-item>
-                    <b-dropdown-item @click="changeGeoLoc">Санкт-Петербург</b-dropdown-item>
+                    <b-dropdown-item
+                        v-for="(g, index) in geolocOptions"
+                        :key="index"
+                        @click="changeGeoLoc(g.id)"
+                    >{{ g.name }}</b-dropdown-item>
+                    <!--b-dropdown-item @click="changeGeoLoc">Санкт-Петербург</b-dropdown-item-->
                 </b-dropdown>
             </div>
         </div>
@@ -74,13 +78,13 @@
     library.add(faSpinner, fasSearch, fabPeriscope , fas, fab);
     import { mapGetters, mapMutations, mapActions } from 'vuex'
     import { MenuIcon, MobileMenuIcon } from '../components/svg'
-    import { menuHiddenBreakpoint } from '../vars/index'
+    import { defaultGeoLoc, geolocOptions, menuHiddenBreakpoint } from '../vars/index'
     import WeatherWidget from "../components/Weathe/WeatherWidget";
     export default {
-        name: "TopNav",
         components: {
             MenuIcon,
             MobileMenuIcon,
+
             WeatherWidget
         },
         data() {
@@ -90,7 +94,8 @@
                 isMobileSearch: false,
                 isSearchOver: false,
                 menuHiddenBreakpoint,
-
+                defaultGeoLoc,
+                geolocOptions,
             }
         },
         methods: {
@@ -110,7 +115,7 @@
                     this.search()
                 }
             },
-            handleDocumentfroMobileSearch() {
+            handleDocumentforMobileSearch() {
                 if (this.isSearchOver) {
                     this.isMobileSearch = false
                     this.searchKeyword = ''
@@ -125,14 +130,14 @@
             })
         },
         beforeDestroy() {
-            document.removeEventListener('click', this.handleDocumentfroMobileSearch)
+            document.removeEventListener('click', this.handleDocumentforMobileSearch)
         },
         watch: {
             isMobileSearch(val) {
                 if (val) {
-                    document.addEventListener('click', this.handleDocumentfroMobileSearch)
+                    document.addEventListener('click', this.handleDocumentforMobileSearch)
                 } else {
-                    document.removeEventListener('click', this.handleDocumentfroMobileSearch)
+                    document.removeEventListener('click', this.handleDocumentforMobileSearch)
                 }
             }
         }

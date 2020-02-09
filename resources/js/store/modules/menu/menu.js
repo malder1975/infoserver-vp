@@ -21,7 +21,7 @@ const getters = {
 }
 
 const mutations = {
-    changeSideMenuStatus (state, payload) {
+    changeSideMenuStatus(state, payload) {
         let classNames = payload.classNames
         let clickIndex = payload.step
         const currentClasses = classNames.split(' ').filter(x => x !== '')
@@ -93,11 +93,11 @@ const mutations = {
         state.clickCount = clickIndex
     },
 
-    changeSelectedMenuHasSubItems (state, payload) {
+    changeSelectedMenuHasSubItems(state, payload) {
         state.selectedMenuHasSubItems = payload
     },
-    addMenuClassname (state, payload) {
-        const { classname, currentClasses } = payload
+    addMenuClassname(state, payload) {
+        const {classname, currentClasses} = payload
 
         const nextClasses =
             !currentClasses.indexOf(classname) > -1
@@ -105,26 +105,21 @@ const mutations = {
                 : currentClasses
         state.menuType = nextClasses
     },
-    changeSideMenuForMobile (state, strCurrentClasses) {
-        const currentClasses = strCurrentClasses
+    changeSideMenuForMobile(state, strCurrentClasses) {
+       let currentClasses =  strCurrentClasses
             ? strCurrentClasses
                 .split(' ')
                 .filter(x => x !== '' && x !== 'sub-show-temporary')
             : ''
         let nextClasses = ''
-        if (currentClasses.includes('main-show-temporary')) {
-            console .log(currentClasses, strCurrentClasses)
-            nextClasses = currentClasses
-                .filter(x => x !== 'main-show-temporary')
-                .join(' ')
-        } else {
-            nextClasses = currentClasses.join(' ') + ' main-show-temporary'
-        }
+        nextClasses = currentClasses.includes('main-show-temporary') ? currentClasses
+            .filter(x => x !== 'main-show-temporary')
+            .join(' ') : strCurrentClasses.join(' ') + ' main-show-temporary';
 
         state.menuType = nextClasses
         state.menuClickCount = 0
     }
-}
+};
 
 const actions = {}
 

@@ -7,6 +7,7 @@
 
                     <li :class="{ active : selectedParentMenu === 'dislocation' }"><a @click.prevent="openSubMenu($event, 'dislocation')" href="#dislocation"><i class=""></i>Дислокация</a> </li>
                     <li :class="{ active : selectedParentMenu === 'vslpositions' }"><a @click.prevent="openSubMenu($event, 'vslpositions')" href="#pages"><i class=""></i>Суда - позиции </a> </li>
+                    <router-link :class="{ active : selectedParentMenu === 'e-visirovanie' }" @click.native="changeSelectedParentHasNoSubmenu('e-visirovanie')" to="#" tag="li"><a><i class=""></i>Электронное визирование</a> </router-link>
 
                 </ul>
             </vue-perfect-scrollbar>
@@ -18,6 +19,8 @@
                 <ul class="list-unstyled" data-link="dislocation" :class="{ 'd-block' :selectedParentMenu === 'dislocation' }">
 
                     <router-link tag="li" to="#"><a><i></i><span>Карта судов ВП</span></a></router-link>
+                    <router-link tag="li" to="#"><a><i></i><span>Табличная сводка</span></a></router-link>
+                    <router-link tag="li" to="#"><a><i></i><span>Итоги рейсов</span></a></router-link>
 
                 </ul>
             </vue-perfect-scrollbar>

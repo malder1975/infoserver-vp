@@ -10,8 +10,12 @@ import BootstrapVue from 'bootstrap-vue'
 import router from './router'
 import { store } from './store'
 
+// Хлебные крошки
+import Breadcrumb from "./components/Common/Breadcrumb";
+
 import vuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueScrollTo from 'vue-scroll-to'
 
 //require('./bootstrap');
 
@@ -22,8 +26,10 @@ window.Vue = Vue;
 
 
 Vue.use(BootstrapVue);
+Vue.use(VueScrollTo);
 
 Vue.component('vue-perfect-scrollbar', vuePerfectScrollbar);
+Vue.component('piaf-breadcrumb', Breadcrumb);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
