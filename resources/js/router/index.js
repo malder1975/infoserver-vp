@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Index from '../views/index'
+import VesselMap from "../views/Dislocation/VesselMap";
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,14 @@ const router = new VueRouter({
             path: '/',
             //redirect: '/views',
             component: Index,
-            name: 'Главная'
+            name: 'Главная',
+            children: [
+                {
+                    path: '/Dislocation',
+                    component: VesselMap,
+                    name: 'Карта судов ВП'
+                }
+            ]
         }
     ]
 });
