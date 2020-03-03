@@ -18,7 +18,7 @@
             <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
                 <ul class="list-unstyled" data-link="dislocation" :class="{ 'd-block' :selectedParentMenu === 'dislocation' }">
 
-                    <router-link tag="li" to="/Dislocation/VesselMap"><a><i></i><span>Карта судов ВП</span></a></router-link>
+                    <router-link tag="li" :to="{name: 'Карта судов ВП'}"><a><i></i><span>Карта судов ВП</span></a></router-link>
                     <router-link tag="li" to="#"><a><i></i><span>Табличная сводка</span></a></router-link>
                     <router-link tag="li" to="#"><a><i></i><span>Итоги рейсов</span></a></router-link>
 

@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Index from '../views/index'
-import VesselMap from "../views/Dislocation/VesselMap";
+import Index from '../views/app/index'
+//import VesselMap from "../views/app/Dislocation/VesselMap";
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    history: true,
+    linkActiveClass: 'active',
+    //history: true,
     mode: 'history',
     scrollBehavior() {
         return {x:0, y:0}
@@ -16,15 +17,29 @@ const router = new VueRouter({
         {
             path: '/',
             //redirect: '/views',
-            component: Index,
-            name: 'Главная',
+            component: () => import('../views/app/main'),
+            //name: 'Главная',
             children: [
                 {
-                    path: '/Dislocation',
-                    component: VesselMap,
+                    path: '/',
+                    component: () => import('../views/app/main'),
+                    name: 'Главная',
+                }
+            ]
+        },
+        {
+           path: 'app/Dislocation',
+            component: () => import('../views/app/Dislocation'),
+            redirect: '/app/Dislocation/VesselMap',
+            children: [
+                {
+                    path: 'VesselMap',
+                    component: () => import('../views/app/Dislocation/VesselMap'),
                     name: 'Карта судов ВП'
                 }
             ]
+
+
         }
     ]
 });

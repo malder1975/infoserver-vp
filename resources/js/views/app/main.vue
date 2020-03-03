@@ -1,20 +1,20 @@
 <template>
     <div>
         <b-row>
-            <b-colxx xxs="12">
+            <b-col xxs="12">
                 <piaf-breadcrumb :heading=" $route.name "></piaf-breadcrumb>
                 <div class="separator mb-5"></div>
-            </b-colxx>
+            </b-col>
         </b-row>
 
         <b-row>
             <b-col xl="6" lg="12">
                 <b-card
-                    title="DDDDD"
-                    sub-title="sssss">
-                    <b-catd-text>
+                        title="DDDDD"
+                        sub-title="sssss">
+                    <b-card-text>
                         fgdfghhfgj jhfgjj
-                    </b-catd-text>
+                    </b-card-text>
                 </b-card>
             </b-col>
         </b-row>
@@ -22,12 +22,10 @@
 </template>
 
 <script>
-    import resizeObserver from 'vue-resize'
+
     export default {
-        name: "index",
-        components: {
-            resizeObserver
-        }
+        //name: "main",
+
     }
 </script>
 

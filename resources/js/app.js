@@ -17,6 +17,15 @@ import vuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueScrollTo from 'vue-scroll-to'
 
+// Подключаем Яндекс карту
+import YmapPlugin from 'vue-yandex-maps'
+const settings = {
+    apiKey: '',
+    lang: 'ru_RU',
+    coordorder: 'latlong',
+    version: '2.1'
+}
+
 //require('./bootstrap');
 
 window.Vue = Vue;
@@ -27,6 +36,7 @@ window.Vue = Vue;
 
 Vue.use(BootstrapVue);
 Vue.use(VueScrollTo);
+Vue.use(YmapPlugin, settings)
 
 Vue.component('vue-perfect-scrollbar', vuePerfectScrollbar);
 Vue.component('piaf-breadcrumb', Breadcrumb);
