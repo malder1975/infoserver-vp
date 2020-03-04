@@ -37,12 +37,28 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         //name: "VesselMap",
         data: () => ({
             coords: [54, 39],
+            rsp: [],
+            errors: []
             //zoom: 10
-        })
+        }),
+
+        methods: {
+            getRsp() {
+                axios.get('/api/rsp').then((response) => (
+                    this.rsp = response.data
+                )).catch((error) =>
+                    this.errors = error.response.data.errors || error.message);
+            }
+        },
+
+        created() {
+            this.getRsp()
+        }
     }
 </script>
 
