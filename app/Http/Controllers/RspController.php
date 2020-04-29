@@ -16,6 +16,7 @@ class RspController extends Controller
     public function index()
     {
         $rsp = Rsp::select('CODE as RSPCODE', 'NAME as RSPNAME')->whereNotNull('NAME')->where('ISOLD', '=', 0)
+            ->where('CODE', 'like', 'ГФ0[1-3]')->orwherein('CODE', ['2038','2009'])
             ->distinct('RSPCODE')->get();
 
         return response()->json($rsp, 200);
