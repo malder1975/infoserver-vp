@@ -36,6 +36,11 @@ const router = new VueRouter({
                     path: 'VesselMap',
                     component: () => import('../views/app/Dislocation/VesselMap'),
                     name: 'Карта судов ВП'
+                },
+                {
+                    path: 'TableResult',
+                    component: () => import('../views/app/Dislocation/TableRes'),
+                    name: 'Табличная сводка'
                 }
             ]
 

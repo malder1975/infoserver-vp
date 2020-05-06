@@ -53146,9 +53146,16 @@ var render = function() {
                     [_c("a", [_c("i"), _c("span", [_vm._v("Карта судов ВП")])])]
                   ),
                   _vm._v(" "),
-                  _c("router-link", { attrs: { tag: "li", to: "#" } }, [
-                    _c("a", [_c("i"), _c("span", [_vm._v("Табличная сводка")])])
-                  ]),
+                  _c(
+                    "router-link",
+                    { attrs: { tag: "li", to: { name: "Табличная сводка" } } },
+                    [
+                      _c("a", [
+                        _c("i"),
+                        _c("span", [_vm._v("Табличная сводка")])
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("router-link", { attrs: { tag: "li", to: "#" } }, [
                     _c("a", [_c("i"), _c("span", [_vm._v("Итоги рейсов")])])
@@ -70417,15 +70424,21 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: 'app/Dislocation',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/app/Dislocation */ "./resources/js/views/app/Dislocation/index.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../views/app/Dislocation */ "./resources/js/views/app/Dislocation/index.vue"));
     },
     redirect: '/app/Dislocation/VesselMap',
     children: [{
       path: 'VesselMap',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/app/Dislocation/VesselMap */ "./resources/js/views/app/Dislocation/VesselMap.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../views/app/Dislocation/VesselMap */ "./resources/js/views/app/Dislocation/VesselMap.vue"));
       },
       name: 'Карта судов ВП'
+    }, {
+      path: 'TableResult',
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/app/Dislocation/TableRes */ "./resources/js/views/app/Dislocation/TableRes.vue"));
+      },
+      name: 'Табличная сводка'
     }]
   }]
 });
